@@ -17,7 +17,7 @@ let games = [
 ];
 
 games = games.sort();
-console.log(games);
+
 
 function loadNames() {
 let ul = document.getElementById('gamesList')
@@ -29,7 +29,17 @@ for (let game of games) {
 }
 }
 
+
+
+
 let userInput = document.getElementById('search');
 
+function clicked() {
+    e.preventDefault;
 
-let search = games.map(game => game.toLowerCase()).filter(game => game.includes(userInput));
+games.filter(game => game.includes(userInput));
+//games.filter(game => game.includes('c'));  this one works in console
+}
+
+
+
