@@ -20,26 +20,36 @@ games = games.sort();
 
 
 function loadNames() {
-let ul = document.getElementById('gamesList')
+    let ul = document.getElementById('gamesList')
 
-for (let game of games) {
-    let li = document.createElement('li');
-    li.innerHTML = game;
-    ul.appendChild(li);
+    for (let game of games) {
+        let li = document.createElement('li');
+        li.innerHTML = game;
+        ul.appendChild(li);
+    }
+ }
+
+
+
+function clicked(event) {
+    event.preventDefault();
+    let userInput = document.getElementById('search').value;
+    let filtered = games.filter(game => game.includes(userInput))
+    
+    let ul = document.getElementById('gamesList')
+    let lis = document.getElementsByTagName('li');
+    
+    for (let li of lis) {
+        
+        if (userInput.length === 0) {
+            li.style.display = 'list-item';
+        } else if(filtered.includes(li.innerHTML)) {
+            li.style.display = 'visibile';
+        } else {
+            li.style.display = 'none';
+        }
+
+    }
+    
 }
-}
-
-
-
-
-let userInput = document.getElementById('search');
-
-function clicked() {
-    e.preventDefault;
-
-games.filter(game => game.includes(userInput));
-//games.filter(game => game.includes('c'));  this one works in console
-}
-
-
 
