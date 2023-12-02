@@ -77,20 +77,16 @@ let games = [
     },
 ];
 
-// games = games.sort();
-let gamesTitles = games.forEach(function(item) { // to make just the titles in a list
-    console.log(item.title)                      // to make just the titles in a list
-});                                              // to make just the titles in a list
-gamesTitles = gamesTitles.sort();
 
 function loadNames() {
     let ul = document.getElementById('gamesList')
-
-    for (let game of games) {
-        let li = document.createElement('li');
-        li.innerHTML = game;
+  
+    for (let game in games) {
+        let li = document.createElement('li');  
+       li.innerHTML = game;
         ul.appendChild(li);
     }
+    
  }
 
 
