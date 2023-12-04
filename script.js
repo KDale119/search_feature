@@ -77,7 +77,7 @@ let games = [
     },
 ];
 
-
+// main list
 function loadNames() {
     let ul = document.getElementById('gamesList')
   
@@ -85,32 +85,39 @@ function loadNames() {
         let li = document.createElement('li');  
        li.innerHTML = games[game].title;
         ul.appendChild(li);
+        //console.log(li) shows all the titles for the games
     }
+
     
  }
 
  
 
-
 function clicked(event) {
     event.preventDefault();
-    let userInput = document.getElementById('search').value;
-    let filtered = games.filter(game => game.includes(userInput))
-    
-    let ul = document.getElementById('gamesList')
+
+    //let ul = document.getElementById('gamesList')
     let lis = document.getElementsByTagName('li');
+    //console.log(lis) // makes 15 list items *see line 118*
     
+
+    let userInputName = document.getElementById('search').value; //pulls value of whats typed in
+    let userInputRunTime = document.getElementById('runTime').value;//pulls value of whats typed in
+
+    let filteredName = games.filter((game) => game.title === userInputName) //filters whats typed into Game:
+    let filteredRunTime = games.filter((game) => game.title === userInputRunTime)//filters whats typed into Run Time:
+
     for (let li of lis) {
         
-        if (userInput.length === 0) {
+        if (userInputName.length === 0 || userInputRunTime.length === 0) {
             li.style.display = 'list-item';
-        } else if(filtered.includes(li.innerHTML)) {
+        } else if(filteredName.includes(li.innerHTML) || filteredRunTime.includes(li.innerHTML)) {
             li.style.display = 'visibile';
         } else {
             li.style.display = 'none';
         }
+        //console.log(lis) // makes 15 sets of 15 list items???
 
+        // if both run time & game typed in list disappears???
     }
-    
 }
-
