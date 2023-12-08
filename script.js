@@ -77,18 +77,17 @@ let games = [
     },
 ];
 
-// main list
+
 function loadNames() {
     let ul = document.getElementById('gamesList')
   
     for (let game in games) {
-        let li = document.createElement('li');  
-       li.innerHTML = games[game].title;
+        let li = document.createElement('li'); 
+        li.id = games[game].title; 
+        
+       li.innerHTML = games[game].title + " <br> Description: " + games[game].summary + "<br> Runtime: " + games[game].runTime
         ul.appendChild(li);
-        //console.log(li) shows all the titles for the games
-    }
-
-    
+    }   
  }
 
  
@@ -96,28 +95,31 @@ function loadNames() {
 function clicked(event) {
     event.preventDefault();
 
-    //let ul = document.getElementById('gamesList')
     let lis = document.getElementsByTagName('li');
-    //console.log(lis) // makes 15 list items *see line 118*
-    
 
     let userInputName = document.getElementById('search').value; //pulls value of whats typed in
     let userInputRunTime = document.getElementById('runTime').value;//pulls value of whats typed in
 
-    let filteredName = games.filter((game) => game.title === userInputName) //filters whats typed into Game:
-    let filteredRunTime = games.filter((game) => game.title === userInputRunTime)//filters whats typed into Run Time:
+    let filteredName = games.filter((game) => game.title.includes(userInputName)) //filters whats typed into Game:
+    let filteredRunTime = games.filter((game) => game.runTime <= userInputRunTime)//filters whats typed into Run Time:
 
+    
     for (let li of lis) {
         
-        if (userInputName.length === 0 || userInputRunTime.length === 0) {
-            li.style.display = 'list-item';
-        } else if(filteredName.includes(li.innerHTML) || filteredRunTime.includes(li.innerHTML)) {
-            li.style.display = 'visibile';
+        if (userInputName.length === 0) {
+            li.style.display = 'list-item';// this part works 
+        } else if(filteredName.find((game) => game.title === li.id)) {
+            li.style.display = 'visibile';     
         } else {
             li.style.display = 'none';
         }
-        //console.log(lis) // makes 15 sets of 15 list items???
-
-        // if both run time & game typed in list disappears???
+        if (userInputRunTime.length === 0) {
+            li.style.display = 'list-item';// this part works 
+        } else if(filteredRunTime.find((game) => game.title === li.id)) {
+            li.style.display = 'visibile';     
+        } else {
+            li.style.display = 'none';
+        }
     }
 }
+
